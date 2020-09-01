@@ -189,7 +189,7 @@ is to bypass a resolving error got during bundle
 
 We are now ready to bundle:
 ```
-# « make bundle » or « npm run serve » can also be used
+# « make bundle » or « npm run serve » can also be used. It is supposed webpack is in your PATH. You may need to update it with `npm bin`
 webpack
 ```
 
