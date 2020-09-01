@@ -1,5 +1,7 @@
 {
-    "dependencies": {"rust-ocaml-hello-world": "0.1.0"},
+    "dependencies": {
+        "rust-ocaml-hello-world": "0.1.0"
+    },
     "scripts": {
         "build": "make all",
         "serve": "webpack-dev-server"
