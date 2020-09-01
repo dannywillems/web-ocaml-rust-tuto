@@ -1,4 +1,7 @@
 module JSHelpers = struct
+  (* the returned type is bigint. Let's convert it to string and let's use
+     Int64.of_string to get a correct OCaml type
+  *)
   let to_int64 x =
     let open Js_of_ocaml in
     Int64.of_string (Js.to_string (Js.Unsafe.meth_call x "toString" [||]))
@@ -30,9 +33,6 @@ module Binding = struct
 
   let get_int64_zero () =
     let open Js_of_ocaml in
-    (* the returned type is bigint. Let's convert it to string and let's use
-       UInt64.of_string to get a correct OCaml type
-    *)
     let x =
       Js.Unsafe.fun_call
         (Js.Unsafe.get required_module "get_int64_zero")
@@ -42,9 +42,6 @@ module Binding = struct
 
   let get_int64_random () =
     let open Js_of_ocaml in
-    (* the returned type is bigint. Let's convert it to string and let's use
-       UInt64.of_string to get a correct OCaml type
-    *)
     let x =
       Js.Unsafe.fun_call
         (Js.Unsafe.get required_module "get_int64_random")
