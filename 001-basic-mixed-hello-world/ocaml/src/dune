@@ -1,0 +1,24 @@
+(executable
+ (name hello_zero)
+ (libraries js_of_ocaml
+            js_of_ocaml-compiler
+            js_of_ocaml-ppx
+ )
+ (modes byte)
+ (js_of_ocaml)
+ (preprocess (pps js_of_ocaml-ppx))
+ (flags (:standard ))
+)
+
+(rule
+ (targets HelloZero.js)
+ (action
+  (run %{bin:js_of_ocaml}
+    ; %{lib:js_of_ocaml-compiler:toplevel.js}
+    ; %{lib:js_of_ocaml-compiler:dynlink.js}
+    %{dep:hello_zero.bc} --pretty --no-inline -o HelloZero.js
+  )
+ )
+)
+
+(alias (name default) (deps HelloZero.js))
