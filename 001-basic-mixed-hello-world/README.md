@@ -80,7 +80,7 @@ Let's move now into the `ocaml` directory.
 Let's first setup the switch we are going to work in:
 
 ```shell
-opam switch ./ 4.09.1
+opam switch create ./ 4.09.1
 eval $(opam config env)
 opam install js_of_ocaml.3.7.0 js_of_ocaml-compiler.3.7.0 js_of_ocaml-ppx.3.7.0
 # Optional, dev tools
