@@ -15,6 +15,7 @@ On the Caml side, js_of_ocaml is used to compile Caml programs to JavaScript pro
 The main entry point is the JavaScript file the js_of_ocaml produced. The
 JavaScript produced by jsoo is not an ES module.
 
+
 ## Try
 
 ```
@@ -27,4 +28,4 @@ npm run build
 npm run serve
 ```
 
-You can access http://localhost:8080
+Go on http://localhost:8080 and open the console. You should see `Hello, World from Rust` followed by `Hello, World from OCaml`.
