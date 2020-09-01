@@ -1,4 +1,4 @@
-all: build-ocaml bundle
+all: build-ocaml build-rust bundle
 
 ocaml-clean:
 	cd ocaml && dune clean

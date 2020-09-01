@@ -1,5 +1,5 @@
 [package]
-name = "js-of-ruml"
+name = "rust-ocaml-hello-world"
 version = "0.1.0"
 authors = ["Danny Willems <be.danny.willems@gmail.com>"]
 edition = "2018"
@@ -9,7 +9,7 @@ edition = "2018"
 wasm-opt = ["-O2", "--enable-mutable-globals"]
 
 [lib]
-name = "js_of_ruml"
+name = "rust_ocaml_hello_world"
 path = "src/lib.rs"
 # TODO: check crate-type https://doc.rust-lang.org/cargo/reference/cargo-targets.html#the-crate-type-field
 # cdylib is required
