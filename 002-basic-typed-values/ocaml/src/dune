@@ -1,0 +1,28 @@
+;; We build first the bytecode to be used by the jsoo compiler
+(executable
+ (name typed_values)
+ (libraries js_of_ocaml
+            js_of_ocaml-compiler
+            js_of_ocaml-ppx
+            ;; integers.0.4.0
+            integers
+ )
+ (modes byte)
+ (js_of_ocaml)
+ (preprocess (pps js_of_ocaml-ppx))
+ (flags (:standard ))
+)
+
+;; Stanza to build PrintHello.js, result of the jsoo compilation.
+(rule
+ (targets typed_values.js)
+ (action
+  (run %{bin:js_of_ocaml}
+    ;; Options for debugging purposes
+    %{dep:typed_values.bc} --pretty --no-inline -o typed_values.js
+  )
+ )
+)
+
+;; default alias that's gonna be used when using dune build
+(alias (name default) (deps typed_values.js))
