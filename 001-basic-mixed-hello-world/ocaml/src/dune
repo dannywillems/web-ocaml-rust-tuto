@@ -1,3 +1,4 @@
+;; We build first the bytecode to be used by the jsoo compiler
 (executable
  (name print_hello)
  (libraries js_of_ocaml
@@ -10,13 +11,16 @@
  (flags (:standard ))
 )
 
+;; Stanza to build PrintHello.js, result of the jsoo compilation.
 (rule
  (targets PrintHello.js)
  (action
   (run %{bin:js_of_ocaml}
+    ;; Options for debugging purposes
     %{dep:print_hello.bc} --pretty --no-inline -o PrintHello.js
   )
  )
 )
 
+;; default alias that's gonna be used when using dune build
 (alias (name default) (deps PrintHello.js))
