@@ -1,0 +1,120 @@
+staged:
+  - lint
+  - build
+
+lint:
+  stage: lint
+  image: ocaml/opam2:4.09
+  before_script:
+    - sudo apt-get install m4 -y
+    - eval $(opam env)
+    - opam repository set-url default https://opam.ocaml.org
+    - opam update
+    - opam install ocamlformat.0.15.0 -y
+  script:
+    - ocamlformat --check 001-basic-mixed-hello-world/ocaml/src/*.ml*
+
+.setup-build: &setup_build
+  stage: build
+  before_script:
+    # Always update system package manager + setup OPAM env
+    - sudo apt-get update
+    - eval $(opam env)
+    - opam repository set-url default https://opam.ocaml.org
+    - opam update
+    - opam depext -i -y conf-rust conf-pkg-config conf-libffi
+    # Install NVM
+    - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+    - export NVM_DIR="$HOME/.nvm"
+    - . "$NVM_DIR/nvm.sh"
+    - nvm install 12.18.3
+    - nvm use 12.18.3
+    # wasm-pack
+    - . "${HOME}/.cargo/env"
+    - curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+###################################
+# 001-basic-mixed-hello-world
+build-001-basic-mixed-hello-world-4.07-1.39.0:
+  <<: *setup_build
+  image: registry.gitlab.com/dannywillems/docker-ocaml-rust:4.07-1.39.0
+  script:
+    - cd 001-basic-mixed-hello-world
+    # Rust code
+    - cd rust
+    - wasm-pack build
+    - cd pkg
+    - npm link
+    - cd ../..
+    # OCaml code
+    - cd ocaml/
+    - opam install js_of_ocaml.3.7.0 js_of_ocaml-compiler.3.7.0 js_of_ocaml-ppx.3.7.0 -y
+    - dune build
+    - cd ../
+    # Bundle
+    - npm link rust-ocaml-hello-world
+    - npm install -d
+    - $(npm bin)/webpack
+
+build-001-basic-mixed-hello-world-4.09-1.39.0:
+  <<: *setup_build
+  image: registry.gitlab.com/dannywillems/docker-ocaml-rust:4.09-1.39.0
+  script:
+    - cd 001-basic-mixed-hello-world
+    # Rust code
+    - cd rust
+    - wasm-pack build
+    - cd pkg
+    - npm link
+    - cd ../..
+    # OCaml code
+    - cd ocaml/
+    - opam install js_of_ocaml.3.7.0 js_of_ocaml-compiler.3.7.0 js_of_ocaml-ppx.3.7.0 -y
+    - dune build
+    - cd ../
+    # Bundle
+    - npm link rust-ocaml-hello-world
+    - npm install -d
+    - $(npm bin)/webpack
+
+build-001-basic-mixed-hello-world-4.08-1.39.0:
+  <<: *setup_build
+  image: registry.gitlab.com/dannywillems/docker-ocaml-rust:4.08-1.39.0
+  script:
+    - cd 001-basic-mixed-hello-world
+    # Rust code
+    - cd rust
+    - wasm-pack build
+    - cd pkg
+    - npm link
+    - cd ../..
+    # OCaml code
+    - cd ocaml/
+    - opam install js_of_ocaml.3.7.0 js_of_ocaml-compiler.3.7.0 js_of_ocaml-ppx.3.7.0 -y
+    - dune build
+    - cd ../
+    # Bundle
+    - npm link rust-ocaml-hello-world
+    - npm install -d
+    - $(npm bin)/webpack
+
+build-001-basic-mixed-hello-world-4.10-1.39.0:
+  <<: *setup_build
+  image: registry.gitlab.com/dannywillems/docker-ocaml-rust:4.10-1.39.0
+  script:
+    - cd 001-basic-mixed-hello-world
+    # Rust code
+    - cd rust
+    - wasm-pack build
+    - cd pkg
+    - npm link
+    - cd ../..
+    # OCaml code
+    - cd ocaml/
+    - opam install js_of_ocaml.3.7.0 js_of_ocaml-compiler.3.7.0 js_of_ocaml-ppx.3.7.0 -y
+    - dune build
+    - cd ../
+    # Bundle
+    - npm link rust-ocaml-hello-world
+    - npm install -d
+    - $(npm bin)/webpack
