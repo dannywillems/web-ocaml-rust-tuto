@@ -1,5 +1,5 @@
 (executable
- (name hello_zero)
+ (name print_hello)
  (libraries js_of_ocaml
             js_of_ocaml-compiler
             js_of_ocaml-ppx
@@ -11,14 +11,12 @@
 )
 
 (rule
- (targets HelloZero.js)
+ (targets PrintHello.js)
  (action
   (run %{bin:js_of_ocaml}
-    ; %{lib:js_of_ocaml-compiler:toplevel.js}
-    ; %{lib:js_of_ocaml-compiler:dynlink.js}
-    %{dep:hello_zero.bc} --pretty --no-inline -o HelloZero.js
+    %{dep:print_hello.bc} --pretty --no-inline -o PrintHello.js
   )
  )
 )
 
-(alias (name default) (deps HelloZero.js))
+(alias (name default) (deps PrintHello.js))

@@ -1,3 +1,3 @@
-import("./ocaml/_build/default/src/HelloZero.js").catch(e =>
-    console.error("Error importing `HelloZero.js`:", e)
+import("./ocaml/_build/default/src/PrintHello.js").catch(e =>
+    console.error("Error importing `PrintHello.js`:", e)
 );
