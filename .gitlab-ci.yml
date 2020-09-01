@@ -1,4 +1,4 @@
-staged:
+stages:
   - lint
   - build
 
