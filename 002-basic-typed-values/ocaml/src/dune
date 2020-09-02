@@ -4,8 +4,8 @@
  (libraries js_of_ocaml
             js_of_ocaml-compiler
             js_of_ocaml-ppx
-            ;; integers.0.4.0
             integers
+            integers-stubs-js
  )
  (modes byte)
  (js_of_ocaml)
@@ -18,6 +18,9 @@
  (targets typed_values.js)
  (action
   (run %{bin:js_of_ocaml}
+    %{lib:zarith_stubs_js:biginteger.js}
+    %{lib:zarith_stubs_js:runtime.js}
+    %{lib:integers-stubs-js:runtime.js}
     ;; Options for debugging purposes
     %{dep:typed_values.bc} --pretty --no-inline -o typed_values.js
   )

@@ -1,0 +1,25 @@
+opam-version: "2.0"
+version: "0.1.0"
+maintainer: "Danny Willems <be.danny.willems@gmail.com>"
+authors: ["Danny Willems <be.danny.willems@gmail.com>"]
+homepage: "https://gitlab.com/dannywillems/web-ocaml-rust-tuto"
+bug-reports: "https://gitlab.com/dannywillems/web-ocaml-rust-tuto/issues"
+dev-repo: "git+https://gitlab.com/dannywillems/web-ocaml-rust-tuto.git"
+license: "MIT"
+build: [
+  ["dune" "build" "-p" name "-j" jobs]
+]
+depends: [
+  "dune" {>= "2.0.0"}
+  "integers" {= "0.4.0"}
+  "zarith_stubs_js"
+  "integers-stubs-js" {= "0.1.0"}
+  "js_of_ocaml" {= "3.7.0"}
+  "js_of_ocaml-compiler" {= "3.7.0"}
+  "js_of_ocaml-ppx" {= "3.7.0"}
+]
+synopsis: "Play with Rust and OCaml in the browser"
+description: "Play with Rust and OCaml in the browser"
+pin-depends: [
+  ["integers-stubs-js.0.1.0" "git+https://gitlab.com/dannywillems/ocaml-integers-stubs-js.git#0.1.0"]
+]
