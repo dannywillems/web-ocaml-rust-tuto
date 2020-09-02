@@ -11,14 +11,18 @@ For the current version of rand and rand_core, getrandom is used. The documentat
 >  require("crypto").randomBytes
 
 
-| Rust   | JavaScript | OCaml  | Notes                                                                   |
-|--------|------------|--------|-------------------------------------------------------------------------|
-| i64    | BigInt     | Int64  | Use string representation to convert from JavaScript to OCaml           |
-<!-- | u64    | BigInt     | UInt64 | Use string representation to convert from JavaScript to OCaml           | -->
-| bool   | bool       | bool   | Use simply Js.to_bool                                                   |
-| usize  | Number     | UInt32 | wasm is only specified on 32 bits                                       |
-| u8     | Number     | Bytes  | `Bytes.of_string (string_of_int (int_of_float (Js.float_of_number x)))` |
-|--------|------------|--------|-------------------------------------------------------------------------|
+| Rust       | JavaScript       | OCaml     | Notes                                                                   |
+|------------|------------------|-----------|-------------------------------------------------------------------------|
+| u16        | Number           | UInt16    | Use string representation to convert from JavaScript to OCaml           |
+| u32        | Number           | UInt32    | Use string representation to convert from JavaScript to OCaml           |
+| u64        | BigInt           | UInt64    | Use string representation to convert from JavaScript to OCaml           |
+| i32        | Number           | Int32     | Use string representation to convert from JavaScript to OCaml           |
+| i64        | BigInt           | Int64     | Use string representation to convert from JavaScript to OCaml           |
+| bool       | bool             | bool      | Use simply Js.to_bool                                                   |
+| usize      | Number           | UInt32    | wasm is only specified on 32 bits                                       |
+| u8         | Number           | Bytes     | `Bytes.of_string (string_of_int (int_of_float (Js.float_of_number x)))` |
+| Option<'a> | null or 'a in Js | 'a option | Depends on 'a. Use Js.Opt.to_option                                     |
+|------------|------------------|-----------|-------------------------------------------------------------------------|
 
 ### Unsupported types
 
@@ -27,6 +31,8 @@ For the current version of rand and rand_core, getrandom is used. The documentat
   However, it is available for the emscripten target (`wasm32-unknown-emscripten`)
 
 ## Build
+
+TODO: Depends on an unpublished package ocaml-integers-stubs-js. Coming soon
 
 Same process than explained in the first tutorial.
 
