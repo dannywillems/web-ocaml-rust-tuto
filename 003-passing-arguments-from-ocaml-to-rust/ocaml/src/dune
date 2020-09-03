@@ -5,7 +5,7 @@
             js_of_ocaml-compiler
             js_of_ocaml-ppx
             integers
-            integers-stubs-js
+            integers_stubs_js
  )
  (modes byte)
  (js_of_ocaml)
@@ -20,7 +20,7 @@
   (run %{bin:js_of_ocaml}
     %{lib:zarith_stubs_js:biginteger.js}
     %{lib:zarith_stubs_js:runtime.js}
-    %{lib:integers-stubs-js:runtime.js}
+    %{lib:integers_stubs_js:runtime.js}
     ;; Options for debugging purposes
     %{dep:lib.bc} --pretty --no-inline -o lib.js
   )
