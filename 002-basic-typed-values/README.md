@@ -32,8 +32,6 @@ For the current version of rand and rand_core, getrandom is used. The documentat
 
 ## Build
 
-TODO: Depends on an unpublished package ocaml-integers-stubs-js. Coming soon
-
 Same process than explained in the first tutorial.
 
 ```
