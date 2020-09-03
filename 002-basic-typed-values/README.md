@@ -22,7 +22,6 @@ For the current version of rand and rand_core, getrandom is used. The documentat
 | usize      | Number           | UInt32    | wasm is only specified on 32 bits                                       |
 | u8         | Number           | Bytes     | `Bytes.of_string (string_of_int (int_of_float (Js.float_of_number x)))` |
 | Option<'a> | null or 'a in Js | 'a option | Depends on 'a. Use Js.Opt.to_option                                     |
-|------------|------------------|-----------|-------------------------------------------------------------------------|
 
 ### Unsupported types
 

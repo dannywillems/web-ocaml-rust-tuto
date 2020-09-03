@@ -1,39 +1,50 @@
-module JSBigInt = struct
-  open Js_of_ocaml
-
-  let of_int x =
-    Js.Unsafe.fun_call (Js.Unsafe.js_expr "BigInt") [| Js.Unsafe.inject (Js.string (string_of_int x)) |]
-
-  let of_uint64 x =
-    Js.Unsafe.fun_call (Js.Unsafe.js_expr "BigInt") [| Js.Unsafe.inject (Js.string (Unsigned.UInt64.to_string x)) |]
-end
-
-module JSHelpers = struct
-    open Js_of_ocaml
-
-    let of_uint64 x =
-    Unsigned.UInt64.of_string
-      (Js.to_string (Js.Unsafe.meth_call x "toString" [||]))
-
-    let to_uint64_js x =
-      JSBigInt.of_uint64 x
-end
-
 module Bindings = struct
   open Js_of_ocaml
+  open Jsoo_lib
 
   let required_module =
-    let m = Js.Unsafe.js_expr {|require ("rust-ocaml-passing-values-from-ocaml-to-rust")|} in
+    let m =
+      Js.Unsafe.js_expr
+        {|require ("rust-ocaml-passing-values-from-ocaml-to-rust")|}
+    in
     m
 
   let add_u64 x y =
-    let res = Js.Unsafe.fun_call
-      (Js.Unsafe.get required_module "add_u64")
-      [| Js.Unsafe.inject (JSHelpers.to_uint64_js x); Js.Unsafe.inject (JSHelpers.to_uint64_js y) |]
+    let open Js.Unsafe in
+    let res =
+      fun_call
+        (get required_module "add_u64")
+        [| inject BigInt.(to_any_js (of_uint64 x));
+           inject BigInt.(to_any_js (of_uint64 y))
+        |]
     in
-    JSHelpers.of_uint64 res
+    BigInt.(to_uint64 (of_js res))
+
+  let add_u32 x y =
+    let open Js.Unsafe in
+    let res =
+      fun_call
+        (get required_module "add_u32")
+        [| inject Number.(to_any_js (of_uint32 x));
+           inject Number.(to_any_js (of_uint32 y))
+        |]
+    in
+    Number.(to_uint32 (of_js res))
 end
 
 let () =
-  Printf.printf "Sum of 1 and 1 as uint64 is %s\n" (Unsigned.UInt64.(to_string (Bindings.add_u64 one one)));
-  Printf.printf "Sum of 21 and 21 as uint64 is %s\n" (Unsigned.UInt64.(to_string (Bindings.add_u64 (of_string "21") (of_string "21"))))
+  Printf.printf
+    "Sum of 1 and 1 as uint64 is %s\n"
+    Unsigned.UInt64.(to_string (Bindings.add_u64 one one)) ;
+  Printf.printf
+    "Sum of 21 and 21 as uint64 is %s\n"
+    Unsigned.UInt64.(
+      to_string (Bindings.add_u64 (of_string "21") (of_string "21"))) ;
+
+  Printf.printf
+    "Sum of 1 and 1 as uint32 is %s\n"
+    Unsigned.UInt32.(to_string (Bindings.add_u32 one one)) ;
+  Printf.printf
+    "Sum of 21 and 21 as uint32 is %s\n"
+    Unsigned.UInt32.(
+      to_string (Bindings.add_u32 (of_string "21") (of_string "21")))

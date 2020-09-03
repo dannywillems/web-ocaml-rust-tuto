@@ -5,10 +5,9 @@
             js_of_ocaml-compiler
             js_of_ocaml-ppx
             integers
-            integers_stubs_js
+            jsoo-lib
  )
  (modes byte)
- (js_of_ocaml)
  (preprocess (pps js_of_ocaml-ppx))
  (flags (:standard ))
 )
