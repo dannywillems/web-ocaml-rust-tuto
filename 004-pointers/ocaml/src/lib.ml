@@ -7,16 +7,13 @@ module Bindings = struct
     in
     m
 
-  let get_new_pointer () =
+  let size_in_bytes = 32
+
+  let get_random_fr () =
     let open Js_of_ocaml in
-    let open Js.Unsafe in
-    let res =
-      fun_call
-        (get required_module "return_pointer")
-        [| inject () |]
-    in
-    print_endline (string_of_float (Js.float_of_number res))
+    let _buffer = Bytes.make size_in_bytes '\000' in
+    Js.Unsafe.fun_call (Js.Unsafe.get required_module "get_random_fr") [| Js.Unsafe.inject () |]
 end
 
 let () =
-  Bindings.get_new_pointer ()
+  Bindings.get_random_fr ()
