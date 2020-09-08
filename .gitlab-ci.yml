@@ -9,6 +9,8 @@ lint:
     - eval $(opam env)
   script:
     - ocamlformat --check 001-basic-mixed-hello-world/ocaml/src/*.ml*
+    - ocamlformat --check 002-basic-typed-values/ocaml/src/*.ml*
+    - ocamlformat --check 003-passing-arguments-from-ocaml-to-rust/ocaml/src/*.ml*
 
 .setup-build: &setup_build
   stage: build
