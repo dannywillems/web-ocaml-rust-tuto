@@ -11,8 +11,9 @@ module Bindings = struct
 
   let get_random_fr () =
     let open Js_of_ocaml in
+    let open Js.Unsafe in
     let _buffer = Bytes.make size_in_bytes '\000' in
-    Js.Unsafe.fun_call (Js.Unsafe.get required_module "get_random_fr") [| Js.Unsafe.inject () |]
+    fun_call (get required_module "rustc_bls12_381_fr_random") [| inject () |]
 end
 
 let () =
