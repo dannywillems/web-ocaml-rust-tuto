@@ -114,3 +114,24 @@ build-001-basic-mixed-hello-world-4.10-1.39.0:
     - npm link rust-ocaml-hello-world
     - npm install -d
     - $(npm bin)/webpack
+
+build-002-basic-typed-values-4.07-1.39.0:
+  <<: *setup_build
+  image: registry.gitlab.com/dannywillems/docker-ocaml-rust:4.07-1.39.0
+  script:
+    - cd 002-basic-typed-values
+    # Rust code
+    - cd rust
+    - wasm-pack build
+    - cd pkg
+    - npm link
+    - cd ../..
+    # OCaml code
+    - cd ocaml/
+    - opam install . -y --deps-only
+    - dune build
+    - cd ../
+    # Bundle
+    - npm link rust-ocaml-basic-typed-values
+    - npm install -d
+    - $(npm bin)/webpack
