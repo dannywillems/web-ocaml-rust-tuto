@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 module.exports = {
     // Required!!!! See https://github.com/webpack/webpack/issues/6615#issuecomment-668177931
-    entry: './bootstrap.js',
+    entry: path.resolve(__dirname, 'ocaml', '_build', 'default', 'src', 'lib.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'

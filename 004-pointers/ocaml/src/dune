@@ -6,6 +6,7 @@
             js_of_ocaml-ppx
             integers
             jsoo-lib
+            jsoo-lib-rust-wasm
  )
  (modes byte)
  (preprocess (pps js_of_ocaml-ppx))
