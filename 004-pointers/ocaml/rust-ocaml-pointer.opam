@@ -12,6 +12,7 @@ build: [
 depends: [
   "dune" {>= "2.0.0"}
   "integers" {= "0.4.0"}
+  "zarith"
   "zarith_stubs_js"
   "integers_stubs_js" {= "1.0"}
   "js_of_ocaml" {= "3.7.0"}

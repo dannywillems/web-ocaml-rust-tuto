@@ -4,7 +4,10 @@
  (libraries js_of_ocaml
             js_of_ocaml-compiler
             js_of_ocaml-ppx
+            zarith
+            zarith_stubs_js
             integers
+            integers_stubs_js
             jsoo-lib
             jsoo-lib-rust-wasm
  )

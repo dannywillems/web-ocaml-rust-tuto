@@ -12,6 +12,8 @@ ocaml-clean:
 
 build-rust:
 	cd rust && wasm-pack build
+# require to get access to the memory in JavaScript
+	echo "\nexport { wasm };" >> rust/pkg/rust_ocaml_pointers.js
 
 build-ocaml:
 	cd ocaml && eval $(opam config env) && dune build
